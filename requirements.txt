@@ -1,0 +1,4 @@
+# Core dependencies for Mancala AI Game
+
+# No external dependencies required for basic implementation
+# Python 3.8+ standard library is sufficient
