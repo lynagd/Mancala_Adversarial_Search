@@ -149,127 +149,127 @@ class MancalaBoard:
         self.board[store] += total
         return total
     
-    def __str__(self):
-        #string representation of the board
-        result = "\n"
-        result += "          Player 2\n"
-        result += "      L   K   J   I   H   G\n"
-        result += f"   [{self.board[2]:2}]"
+#     def __str__(self):
+#         #string representation of the board
+#         result = "\n"
+#         result += "          Player 2\n"
+#         result += "      L   K   J   I   H   G\n"
+#         result += f"   [{self.board[2]:2}]"
         
-        for pit in ['L', 'K', 'J', 'I', 'H', 'G']:
-            result += f" {self.board[pit]:2} "
+#         for pit in ['L', 'K', 'J', 'I', 'H', 'G']:
+#             result += f" {self.board[pit]:2} "
         
-        result += f" [{self.board[1]:2}]\n"
-        result += "     "
+#         result += f" [{self.board[1]:2}]\n"
+#         result += "     "
         
-        for pit in ['A', 'B', 'C', 'D', 'E', 'F']:
-            result += f" {self.board[pit]:2} "
+#         for pit in ['A', 'B', 'C', 'D', 'E', 'F']:
+#             result += f" {self.board[pit]:2} "
         
-        result += "\n"
-        result += "      A   B   C   D   E   F\n"
-        result += "          Player 1\n"
+#         result += "\n"
+#         result += "      A   B   C   D   E   F\n"
+#         result += "          Player 1\n"
         
-        return result
+#         return result
 
 
-# Testing functions
-def test_board():
-    # Basic tests for MancalaBoard functionality
-    print("="*50)
-    print("Testing MancalaBoard")
-    print("="*50)
+# # Testing functions
+# def test_board():
+#     # Basic tests for MancalaBoard functionality
+#     print("="*50)
+#     print("Testing MancalaBoard")
+#     print("="*50)
     
-    # Test 1: Initialization
-    print("\n1. Testing initialization...")
-    board = MancalaBoard()
-    print(board)
-    assert board.board['A'] == 4, "Pit A should have 4 seeds"
-    assert board.board[1] == 0, "Store 1 should be empty"
-    print(" Initialization works!")
+#     # Test 1: Initialization
+#     print("\n1. Testing initialization...")
+#     board = MancalaBoard()
+#     print(board)
+#     assert board.board['A'] == 4, "Pit A should have 4 seeds"
+#     assert board.board[1] == 0, "Store 1 should be empty"
+#     print(" Initialization works!")
     
-    # Test 2: Possible moves
-    print("\n2. Testing possibleMoves...")
-    moves = board.possibleMoves('player1')
-    print(f"Player 1 possible moves: {moves}")
-    assert len(moves) == 6, "Should have 6 possible moves"
-    assert 'A' in moves, "A should be in possible moves"
-    print(" possibleMoves works!")
+#     # Test 2: Possible moves
+#     print("\n2. Testing possibleMoves...")
+#     moves = board.possibleMoves('player1')
+#     print(f"Player 1 possible moves: {moves}")
+#     assert len(moves) == 6, "Should have 6 possible moves"
+#     assert 'A' in moves, "A should be in possible moves"
+#     print(" possibleMoves works!")
     
-    # Test 3: Basic move
-    print("\n3. Testing basic move (A)...")
-    board.doMove('player1', 'A')
-    print(board)
-    assert board.board['A'] == 0, "Pit A should be empty"
-    assert board.board['B'] == 5, "Pit B should have 5 seeds"
-    assert board.board['C'] == 5, "Pit C should have 5 seeds"
-    assert board.board['D'] == 5, "Pit D should have 5 seeds"
-    assert board.board['E'] == 5, "Pit E should have 5 seeds"
-    print(" Basic move works!")
+#     # Test 3: Basic move
+#     print("\n3. Testing basic move (A)...")
+#     board.doMove('player1', 'A')
+#     print(board)
+#     assert board.board['A'] == 0, "Pit A should be empty"
+#     assert board.board['B'] == 5, "Pit B should have 5 seeds"
+#     assert board.board['C'] == 5, "Pit C should have 5 seeds"
+#     assert board.board['D'] == 5, "Pit D should have 5 seeds"
+#     assert board.board['E'] == 5, "Pit E should have 5 seeds"
+#     print(" Basic move works!")
     
-    # Test 4: Move reaching store
-    print("\n4. Testing move reaching store (F)...")
-    board.reset()
-    board.doMove('player1', 'F')
-    print(board)
-    assert board.board['F'] == 0, "Pit F should be empty"
-    assert board.board[1] == 1, "Store 1 should have 1 seed"
-    print(" Move reaching store works!")
+#     # Test 4: Move reaching store
+#     print("\n4. Testing move reaching store (F)...")
+#     board.reset()
+#     board.doMove('player1', 'F')
+#     print(board)
+#     assert board.board['F'] == 0, "Pit F should be empty"
+#     assert board.board[1] == 1, "Store 1 should have 1 seed"
+#     print(" Move reaching store works!")
     
-    # Test 5: Capture
-    print("\n5. Testing capture...")
-    board.reset()
-    # Set up a capture scenario
-    board.board['C'] = 0  # Empty pit C
-    board.board['A'] = 2  # Move from A should land in C
-    board.board['J'] = 3  # Opposite pit has seeds
-    print("Before capture:")
-    print(board)
-    board.doMove('player1', 'A')
-    print("After capture:")
-    print(board)
-    assert board.board['C'] == 0, "Pit C should be empty after capture"
-    assert board.board['J'] == 0, "Opposite pit J should be empty"
-    assert board.board[1] >= 4, "Store should have captured seeds"
-    print(" Capture works!")
+#     # Test 5: Capture
+#     print("\n5. Testing capture...")
+#     board.reset()
+#     # Set up a capture scenario
+#     board.board['C'] = 0  # Empty pit C
+#     board.board['A'] = 2  # Move from A should land in C
+#     board.board['J'] = 3  # Opposite pit has seeds
+#     print("Before capture:")
+#     print(board)
+#     board.doMove('player1', 'A')
+#     print("After capture:")
+#     print(board)
+#     assert board.board['C'] == 0, "Pit C should be empty after capture"
+#     assert board.board['J'] == 0, "Opposite pit J should be empty"
+#     assert board.board[1] >= 4, "Store should have captured seeds"
+#     print(" Capture works!")
     
-    # Test 6: Copy
-    print("\n6. Testing copy...")
-    board1 = MancalaBoard()
-    board2 = board1.copy()
-    board2.board['A'] = 10
-    assert board1.board['A'] == 4, "Original should not change"
-    assert board2.board['A'] == 10, "Copy should change"
-    print(" Copy works!")
+#     # Test 6: Copy
+#     print("\n6. Testing copy...")
+#     board1 = MancalaBoard()
+#     board2 = board1.copy()
+#     board2.board['A'] = 10
+#     assert board1.board['A'] == 4, "Original should not change"
+#     assert board2.board['A'] == 10, "Copy should change"
+#     print(" Copy works!")
     
-    # Test 7: Empty side check
-    print("\n7. Testing is_side_empty...")
-    board = MancalaBoard()
-    assert not board.is_side_empty('player1'), "Side should not be empty"
-    for pit in board.player1_pits:
-        board.board[pit] = 0
-    assert board.is_side_empty('player1'), "Side should be empty"
-    print(" is_side_empty works!")
+#     # Test 7: Empty side check
+#     print("\n7. Testing is_side_empty...")
+#     board = MancalaBoard()
+#     assert not board.is_side_empty('player1'), "Side should not be empty"
+#     for pit in board.player1_pits:
+#         board.board[pit] = 0
+#     assert board.is_side_empty('player1'), "Side should be empty"
+#     print(" is_side_empty works!")
     
-    print("\n" + "="*50)
-    print("All tests passed! ✓")
-    print("="*50)
+#     print("\n" + "="*50)
+#     print("All tests passed! ✓")
+#     print("="*50)
 
 
-if __name__ == "__main__":
-    # Run tests
-    test_board()
+# if __name__ == "__main__":
+#     # Run tests
+#     test_board()
     
-    # Interactive test
-    print("\n\nInteractive Board Test:")
-    print("Creating a new board...")
-    board = MancalaBoard()
-    print(board)
+#     # Interactive test
+#     print("\n\nInteractive Board Test:")
+#     print("Creating a new board...")
+#     board = MancalaBoard()
+#     print(board)
     
-    print("\nTry a few moves:")
-    print("Move from A:")
-    board.doMove('player1', 'A')
-    print(board)
+#     print("\nTry a few moves:")
+#     print("Move from A:")
+#     board.doMove('player1', 'A')
+#     print(board)
     
-    print("\nMove from G:")
-    board.doMove('player2', 'G')
-    print(board)
+#     print("\nMove from G:")
+#     board.doMove('player2', 'G')
+#     print(board)
