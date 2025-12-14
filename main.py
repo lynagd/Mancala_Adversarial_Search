@@ -1,5 +1,5 @@
-from game import Game
-from play import Play
+from src.game import Game
+from src.ai_player import Play 
 
 def display_menu():
     """Display the main menu."""

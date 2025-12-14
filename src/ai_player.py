@@ -1,23 +1,13 @@
-import copy
-from game import Game
 
+from .game import Game
 class Play:
     def __init__(self, game, depth=6):
-        """
-        Initialize the Play class.
-        
-        Args:
-            game: Instance of Game class
-            depth: Maximum depth for Minimax search (default: 6)
-        """
         self.game = game
         self.depth = depth
     
     def humanTurn(self):
-        """
-        Allow the human player to take their turn.
-        Returns True if the player gets another turn (last seed in store).
-        """
+        #Allow the human player to take their turn.
+        #Returns True if the player gets another turn (last seed in store).
         print("\n" + "="*50)
         print("HUMAN'S TURN")
         print("="*50)
@@ -61,15 +51,9 @@ class Play:
         return False
     
     def computerTurn(self, computer_name='COMPUTER', heuristic_version=1):
-        """
-        Allow the computer to take its turn using Minimax Alpha-Beta Pruning.
-        
-        Args:
-            computer_name: 'COMPUTER' or 'COMPUTER2'
-            heuristic_version: 1 for standard heuristic, 2 for advanced heuristic
-        
-        Returns True if the computer gets another turn (last seed in store).
-        """
+        #Allow the computer to take its turn using Minimax Alpha-Beta Pruning.
+      
+        #Returns True if the computer gets another turn (last seed in store).
         print("\n" + "="*50)
         print(f"{computer_name}'S TURN")
         print("="*50)
@@ -88,7 +72,7 @@ class Play:
         print(f"Thinking... (depth={self.depth})")
         
         # Determine MAX or MIN based on computer name
-        if computer_name == 'COMPUTER':
+        if computer_name in ['COMPUTER', 'COMPUTER1']:
             player_type = 1  # MAX
         else:
             player_type = -1  # MIN
@@ -117,16 +101,9 @@ class Play:
         return False
     
     def _execute_move_with_replay_check(self, player, pit):
-        """
-        Execute a move and check if the last seed lands in the player's store.
-        
-        Args:
-            player: 'player1' or 'player2'
-            pit: The pit to play from
-        
-        Returns:
-            True if last seed lands in player's store (replay), False otherwise
-        """
+        #Execute a move and check if the last seed lands in the player's store.
+
+        #True if last seed lands in player's store (replay), False otherwise
         # Determine player's store
         my_store = 1 if player == 'player1' else 2
         opponent_store = 2 if player == 'player1' else 1
@@ -156,20 +133,9 @@ class Play:
         return lands_in_store
     
     def MinimaxAlphaBetaPruning(self, game, player, depth, alpha, beta, heuristic_version=1):
-        """
-        Minimax algorithm with Alpha-Beta Pruning.
-        
-        Args:
-            game: Current game state
-            player: 1 (MAX) or -1 (MIN)
-            depth: Remaining depth to search
-            alpha: Alpha value for pruning
-            beta: Beta value for pruning
-            heuristic_version: 1 for standard, 2 for advanced heuristic
-        
-        Returns:
-            (best_value, best_pit) tuple
-        """
+        #Minimax algorithm with Alpha-Beta Pruning.
+       
+        #Returns:(best_value, best_pit) tuple
         # Terminal condition: game over or depth limit reached
         if game.gameOver() or depth == 0:
             if heuristic_version == 1:
@@ -180,14 +146,21 @@ class Play:
         
         # Determine which player side to use
         if player == 1:  # MAX
-            player_key = 'COMPUTER' if 'COMPUTER' in game.playerSide else 'MAX'
+            if 'COMPUTER' in game.playerSide:
+                player_key = 'COMPUTER'
+            elif 'COMPUTER1' in game.playerSide:
+                player_key = 'COMPUTER1'
+            else:
+                # Fallback: use first key in playerSide
+                player_key = list(game.playerSide.keys())[0]
         else:  # MIN
             if 'HUMAN' in game.playerSide:
                 player_key = 'HUMAN'
             elif 'COMPUTER2' in game.playerSide:
                 player_key = 'COMPUTER2'
             else:
-                player_key = 'MIN'
+                # Fallback: use second key in playerSide
+                player_key = list(game.playerSide.keys())[1]
         
         player_side = game.playerSide[player_key]
         possible_moves = game.state.possibleMoves(player_side)
@@ -269,20 +242,18 @@ class Play:
         return best_value, best_pit
     
     def _advanced_heuristic(self, game):
-        """
-        Advanced heuristic for COMPUTER2.
-        Takes into account not just the score difference, but also:
-        - Number of seeds on player's side (mobility)
-        - Strategic pit positions
+        #Advanced heuristic for COMPUTER2.
+        #Takes into account not just the score difference, but also:
+        # Number of seeds on player's side (mobility)
+        # Strategic pit positions
         
-        Args:
-            game: Current game state
-        
-        Returns:
-            Heuristic value
-        """
-        # Determine players
-        if 'COMPUTER' in game.playerSide and 'COMPUTER2' in game.playerSide:
+        #Returns:Heuristic value
+
+        # Determine players based on available keys
+        if 'COMPUTER1' in game.playerSide and 'COMPUTER2' in game.playerSide:
+            computer_player = game.playerSide['COMPUTER1']
+            opponent_player = game.playerSide['COMPUTER2']
+        elif 'COMPUTER' in game.playerSide and 'COMPUTER2' in game.playerSide:
             computer_player = game.playerSide['COMPUTER']
             opponent_player = game.playerSide['COMPUTER2']
         elif 'COMPUTER' in game.playerSide and 'HUMAN' in game.playerSide:
