@@ -1,5 +1,5 @@
 import copy
-from mancala_board import MancalaBoard
+from .mancala_board import MancalaBoard
 
 
 class Game:
@@ -61,7 +61,7 @@ class Game:
     
     def evaluate(self):
         #Evaluate the current game state from the perspective of the maximizing player.
-        
+
         # Determine the maximizing player
         # The maximizing player is always the one doing the thinking (the AI)
         

@@ -22,7 +22,7 @@ mancala-ai/
 ├── src/
 │   ├── mancala_board.py    # Board state representation
 │   ├── game.py              # Game logic and evaluation
-│   └── play.py              # Game controller and AI
+│   └── ai_player.py              # Game controller and AI
 ├── README.md
 ├── requirements.txt
 └── .gitignore
@@ -45,12 +45,13 @@ Player with most seeds in their store wins
 🎓 Academic Context
 This project is part of the Problem Solving course for Master 1 Visual Computing at USTHB (2025/2026).
 📝 Features
+- ✅ Complete Mancala game rules implementation
+- ✅ AI opponent with configurable difficulty (depth 3, 6, 9, or custom)
+- ✅ Minimax algorithm with Alpha-Beta pruning
+- ✅ Human vs Computer gameplay (player chooses their side)
+- ✅ Computer vs Computer gameplay (two AI with different heuristics)
+- ✅ Play multiple rounds with same configuration
+- ✅ Console-based board visualization
+- ✅ Replay rule: Extra turn when last seed lands in store
 
- Complete Mancala game rules implementation
- AI opponent with configurable difficulty (search depth)
- Minimax algorithm with Alpha-Beta pruning
- Human vs Computer gameplay
- GUI interface 
-
-Instructor: Dr. Meriem SEBAI
 Academic Year: 2025/2026
