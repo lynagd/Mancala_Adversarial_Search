@@ -1,4 +1,3 @@
-
 from .game import Game
 class Play:
     def __init__(self, game, depth=6):

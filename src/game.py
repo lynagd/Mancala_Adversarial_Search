@@ -1,7 +1,5 @@
 import copy
 from .mancala_board import MancalaBoard
-
-
 class Game:
     
     def __init__(self, playerSide=None):
@@ -60,31 +58,35 @@ class Game:
         return 'UNKNOWN', winner_score
     
     def evaluate(self):
-        #Evaluate the current game state from the perspective of the maximizing player.
+    #Evaluate the current game state from the perspective of the maximizing player.
 
-        # Determine the maximizing player
-        # The maximizing player is always the one doing the thinking (the AI)
-        
-        if 'COMPUTER' in self.playerSide:
-            # Human vs Computer mode
-            maximizing_player = self.playerSide['COMPUTER']
-            minimizing_player = self.playerSide['HUMAN']
-            
+    # Determine the maximizing player
+    # The maximizing player is always the one doing the thinking (the AI)
+    
+        if 'COMPUTER' in self.playerSide and 'HUMAN' in self.playerSide:
+         # Human vs Computer mode
+         maximizing_player = self.playerSide['COMPUTER']
+         minimizing_player = self.playerSide['HUMAN']
         elif 'COMPUTER1' in self.playerSide and 'COMPUTER2' in self.playerSide:
-            # Computer vs Computer mode
-            # COMPUTER1 is designated as the maximizing player
-            maximizing_player = self.playerSide['COMPUTER1']
-            minimizing_player = self.playerSide['COMPUTER2']
-            
-        else:
-            # Fallback - should not happen in normal gameplay
-            # If playerSide only has player1 and player2, use those
-            maximizing_player = 'player1'
-            minimizing_player = 'player2'
+         # Computer vs Computer mode
+         # COMPUTER1 is designated as the maximizing player
+         maximizing_player = self.playerSide['COMPUTER1']
+         minimizing_player = self.playerSide['COMPUTER2']
+    
+        elif 'COMPUTER' in self.playerSide and 'COMPUTER2' in self.playerSide:
+         # Alternative Computer vs Computer mode (COMPUTER vs COMPUTER2)
+         maximizing_player = self.playerSide['COMPUTER']
+         minimizing_player = self.playerSide['COMPUTER2']
         
+        else:
+         # Fallback - should not happen in normal gameplay
+         # If playerSide only has player1 and player2, use those
+         maximizing_player = 'player1'
+         minimizing_player = 'player2'
+    
         max_seeds = self.state.get_store_count(maximizing_player)
         min_seeds = self.state.get_store_count(minimizing_player)
-        
+    
         return max_seeds - min_seeds
     
     def copy(self):
