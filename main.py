@@ -1,8 +1,10 @@
 from src.game import Game
-from src.ai_player import Play 
+from src.ai_player import Play
+
+
 
 def display_menu():
-    """Display the main menu."""
+    #Display the main menu.
     print("\n" + "="*60)
     print(" "*15 + "MANCALA GAME")
     print("="*60)
@@ -12,8 +14,9 @@ def display_menu():
     print("3. Exit")
     print("="*60)
 
+
 def choose_side():
-    """Let human choose their side."""
+    #Let user choose side: Player 1 or Player 2.
     print("\n" + "="*60)
     print("Choose your side:")
     print("1. Player 1 (bottom side: A-F)")
@@ -28,6 +31,7 @@ def choose_side():
             return 'player2'
         else:
             print("Invalid choice! Please enter 1 or 2.")
+
 
 def choose_depth():
     """Let user choose search depth."""
@@ -60,8 +64,8 @@ def choose_depth():
         else:
             print("Invalid choice! Please enter 1-4.")
 
+
 def human_vs_computer():
-    """Mode: Human vs Computer."""
     print("\n" + "="*60)
     print(" "*10 + "HUMAN VS COMPUTER MODE")
     print("="*60)
@@ -132,17 +136,26 @@ def human_vs_computer():
         print(f" "*20 + "IT'S A TIE!")
         print(f" "*15 + f"Both players: {score} seeds")
     else:
-        winner_name = 'HUMAN' if winner == human_side else 'COMPUTER'
-        loser_side = computer_side if winner == human_side else human_side
+        # Determine winner name for display
+        if winner == 'HUMAN':
+            winner_name = 'HUMAN'
+            loser_name = 'COMPUTER'
+            loser_side = computer_side
+        else:
+            winner_name = 'COMPUTER'
+            loser_name = 'HUMAN'
+            loser_side = human_side
+        
         loser_score = game.state.get_store_count(loser_side)
         
         print(f" "*15 + f"🏆 {winner_name} WINS! 🏆")
         print(f" "*10 + f"{winner_name}: {score} seeds")
-        print(f" "*10 + f"{'COMPUTER' if winner_name == 'HUMAN' else 'HUMAN'}: {loser_score} seeds")
+        print(f" "*10 + f"{loser_name}: {loser_score} seeds")
     print("="*60)
 
+
 def computer_vs_computer():
-    """Mode: Computer vs Computer with different heuristics."""
+    #Computer vs Computer mode with two different heuristics.
     print("\n" + "="*60)
     print(" "*10 + "COMPUTER VS COMPUTER MODE")
     print("="*60)
@@ -155,7 +168,7 @@ def computer_vs_computer():
     
     # Initialize game
     game = Game(playerSide={
-        'COMPUTER': 'player1',
+        'COMPUTER1': 'player1',
         'COMPUTER2': 'player2'
     })
     
@@ -171,18 +184,18 @@ def computer_vs_computer():
     input("\nPress Enter to start the game...")
     
     # Game loop
-    current_computer = 'COMPUTER'
+    current_computer = 'COMPUTER1'
     move_count = 0
     
     while not game.gameOver():
         move_count += 1
         print(f"\n--- Move #{move_count} ---")
         
-        if current_computer == 'COMPUTER':
+        if current_computer == 'COMPUTER1':
             # Computer 1's turn with standard heuristic
             replay = True
             while replay and not game.gameOver():
-                replay = play.computerTurn('COMPUTER', heuristic_version=1)
+                replay = play.computerTurn('COMPUTER1', heuristic_version=1)
                 if replay and not game.gameOver():
                     print("\n→ COMPUTER 1 gets another turn!")
                     input("Press Enter to continue...")
@@ -199,7 +212,7 @@ def computer_vs_computer():
                     input("Press Enter to continue...")
             
             if not game.gameOver():
-                current_computer = 'COMPUTER'
+                current_computer = 'COMPUTER1'
         
         if not game.gameOver():
             input("\nPress Enter for next move...")
@@ -218,22 +231,22 @@ def computer_vs_computer():
         print(f" "*20 + "IT'S A TIE!")
         print(f" "*15 + f"Both computers: {score} seeds")
     else:
-        winner_name = 'COMPUTER 1' if winner == 'player1' else 'COMPUTER 2'
-        loser_score = game.state.get_store_count('player2' if winner == 'player1' else 'player1')
+        winner_name = 'COMPUTER 1' if winner == 'COMPUTER1' else 'COMPUTER 2'
+        loser_name = 'COMPUTER 2' if winner == 'COMPUTER1' else 'COMPUTER 1'
+        loser_side = 'player2' if winner == 'COMPUTER1' else 'player1'
+        loser_score = game.state.get_store_count(loser_side)
         
         print(f" "*15 + f"🏆 {winner_name} WINS! 🏆")
         print(f" "*10 + f"{winner_name}: {score} seeds")
-        print(f" "*10 + f"{'COMPUTER 2' if winner == 'player1' else 'COMPUTER 1'}: {loser_score} seeds")
+        print(f" "*10 + f"{loser_name}: {loser_score} seeds")
     print("="*60)
     
     print(f"\nTotal moves: {move_count}")
 
+
 def main():
-    """Main function to run the Mancala game."""
     print("\n" + "="*60)
     print(" "*5 + "WELCOME TO MANCALA - ADVERSARIAL SEARCH")
-    print(" "*10 + "Master 1, Visual Computing")
-    print(" "*15 + "2025/2026")
     print("="*60)
     
     while True:
@@ -268,6 +281,7 @@ def main():
             print("\n❌ Invalid choice! Please enter 1, 2, or 3.")
     
     print()
+
 
 if __name__ == "__main__":
     main()
