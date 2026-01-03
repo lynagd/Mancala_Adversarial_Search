@@ -1,13 +1,10 @@
 # 🎮 Mancala AI Game
 
-An intelligent implementation of the traditional African board game Mancala (Awalé) featuring an AI opponent powered by **Minimax algorithm with Alpha-Beta pruning**. Play in your terminal or through a beautiful web interface!
+An intelligent implementation of the traditional African board game Mancala (Awalé) featuring an AI opponent powered by **Minimax algorithm with Alpha-Beta pruning**. Play in your terminal or through a web interface!
 
 
 ---
 
-## 📋 About
-
-Mancala is an ancient strategy game that has been played for thousands of years across Africa and Asia. This implementation brings the classic game to life with modern AI techniques, offering both command-line and web-based gameplay experiences.
 
 ### Game Rules
 
@@ -92,7 +89,7 @@ python main.py
 
 ### Option 2: Web Interface
 
-Experience the game with a modern, beautiful web interface:
+Experience the game with a web interface:
 
 1. **Start the Flask server:**
    ```bash
@@ -104,7 +101,6 @@ Experience the game with a modern, beautiful web interface:
    - The interface will automatically connect to the server at `http://localhost:5000`
 
 **Features:**
-- Stunning visual design with gradient backgrounds
 - Animated seed distribution
 - Real-time game state updates
 - Pause/Resume functionality
@@ -180,25 +176,6 @@ Experience the game with a modern, beautiful web interface:
 
 ---
 
-## 🎨 Features Highlight
-
-### Terminal Interface
-✅ Clean ASCII board visualization  
-✅ Color-coded player indicators  
-✅ Move-by-move game progression  
-✅ Instant feedback on captures and replays  
-✅ Comprehensive game statistics  
-
-### Web Interface
-✅ Modern, responsive design  
-✅ Gradient backgrounds and animations  
-✅ Visual seed representation  
-✅ Real-time move evaluation display  
-✅ Pause/resume functionality  
-✅ Game over modal with winner celebration  
-
----
-
 ## 🔧 Configuration
 
 ### Adjusting AI Behavior
@@ -235,4 +212,4 @@ mobility_diff * 0.5  # Seed distribution (secondary)
 
 ---
 
-**Enjoy playing Mancala! May the best strategist win! 🏆**
+**Enjoy playing Mancala! **
